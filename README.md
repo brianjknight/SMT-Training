@@ -1,1 +1,1 @@
-A repository for OO training at exercises at SMT.
+A repository for training exercises at SMT.
