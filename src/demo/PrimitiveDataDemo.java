@@ -19,16 +19,15 @@ import exercises.PrimitiveData;
 public class PrimitiveDataDemo {
 	public static void main(String[] args) {
 		// Testing PrimitiveData class:
+		System.out.println("-".repeat(50));
 		PrimitiveData pd1 = new PrimitiveData(1, 2.123456789D, 3.123456789F, 'a', false);
-		System.out.println("Calling pd1.printValues():");
 		pd1.printValues();
 
-		System.out.println("-".repeat(20));
+		System.out.println("-".repeat(50));
 		
-		System.out.println("Calling pd1.toString()");
 		System.out.println(pd1.toString());
 
-		System.out.println("-".repeat(20));
+		System.out.println("-".repeat(50));
 		
 		PrimitiveData pd2 = new PrimitiveData();
 		pd2.setI(1);
@@ -36,13 +35,12 @@ public class PrimitiveDataDemo {
 		pd2.setF(3.987654321F);
 		pd2.setC('A');
 		pd2.setB(true);
-		System.out.println("Calling pd2.printValues():");
 		pd2.printValues();
 		
-		System.out.println("-".repeat(20));
+		System.out.println("-".repeat(50));
 		
-		System.out.println("Calling pd2.toString()");
 		System.out.println(pd2.toString());
 
+		System.out.println("-".repeat(50));
 	}
 }
