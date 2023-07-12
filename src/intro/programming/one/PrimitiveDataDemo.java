@@ -1,6 +1,4 @@
-package demo;
-
-import exercises.PrimitiveData;
+package intro.programming.one;
 
 /****************************************************************************
  * <b>Title:</b> PrimitiveDataDemo.java

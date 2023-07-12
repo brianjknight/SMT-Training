@@ -1,6 +1,4 @@
-package demo;
-
-import exercises.NumberDisplay;
+package intro.programming.one;
 
 /****************************************************************************
  * <b>Title:</b> NumberDisplayDemo.java

@@ -1,4 +1,4 @@
-package exercises;
+package intro.programming.one;
 
 /****************************************************************************
  * <b>Title:</b> PrimitiveData.java
