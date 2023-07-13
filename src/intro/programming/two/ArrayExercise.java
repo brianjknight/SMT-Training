@@ -5,7 +5,7 @@ import java.util.Arrays;
 /****************************************************************************
  * <b>Title:</b> ArraysExercise.java
  * <b>Project:</b> brian.training
- * <b>Description:</b> CHANGE ME!!
+ * <b>Description:</b> Exercise for Intro to Programming Part II
  * <b>Copyright:</b> Copyright (c) 2023
  * <b>Company:</b> Silicon Mountain Technologies
  * 
@@ -47,9 +47,9 @@ public class ArrayExercise {
 		}
 	}
 	
-	private void fillArray(int m) {
+	private void fillArray(int multiplier) {
 		for (int i=0; i<nums.length; i++ ) {
-			nums[i] = (int) (Math.random() * m); 
+			nums[i] = (int) (Math.random() * multiplier); 
 		}
 	}
 		
