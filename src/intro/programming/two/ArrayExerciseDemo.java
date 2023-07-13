@@ -23,5 +23,10 @@ public class ArrayExerciseDemo {
 		
 		ArrayExercise e2 = new ArrayExercise(20);
 		e2.display();
+		
+		System.out.println("*".repeat(50));
+		
+		ArrayExercise e3 = new ArrayExercise(15, 100_000);
+		e3.display();
 	}
 }

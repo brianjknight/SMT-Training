@@ -29,6 +29,11 @@ public class ArrayExercise {
 		fillArray();
 	}
 	
+	public ArrayExercise(int n, int multiplier) {
+		nums = new int[n];
+		fillArray(multiplier);
+	}
+	
 	public void display() {
 		System.out.printf("%d random numbers%n", nums.length);
 		for (int i=0; i<nums.length; i++) {
@@ -39,6 +44,12 @@ public class ArrayExercise {
 	private void fillArray() {
 		for (int i=0; i<nums.length; i++ ) {
 			nums[i] = (int) (Math.random() * 100); 
+		}
+	}
+	
+	private void fillArray(int m) {
+		for (int i=0; i<nums.length; i++ ) {
+			nums[i] = (int) (Math.random() * m); 
 		}
 	}
 		
