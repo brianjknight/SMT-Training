@@ -8,7 +8,6 @@ build
 bin/
 .classpath
 .gitattributes
-.project
 gradlew
 gradlew.bat
 settings.gradle

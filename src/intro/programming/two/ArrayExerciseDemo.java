@@ -3,7 +3,7 @@ package intro.programming.two;
 /****************************************************************************
  * <b>Title:</b> ArrayExerciseDemo.java
  * <b>Project:</b> brian.training
- * <b>Description:</b> CHANGE ME!!
+ * <b>Description:</b> Demo class with main method to instantiate and call method of ArrayExercise.
  * <b>Copyright:</b> Copyright (c) 2023
  * <b>Company:</b> Silicon Mountain Technologies
  * 
