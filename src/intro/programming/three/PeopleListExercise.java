@@ -49,9 +49,7 @@ public class PeopleListExercise {
 		/*
 		 * Prints the initial list of persons.
 		 */
-		for (Person p : persons) {
-			System.out.println(p.toString());
-		}
+		PeopleListExercise.printPersons(persons);
 		
 		System.out.println("#".repeat(50));
 		
@@ -59,9 +57,7 @@ public class PeopleListExercise {
 		 * Shuffle the list of persons and print.
 		 */
 		Collections.shuffle(persons);
-		for (Person p : persons) {
-			System.out.println(p.toString());
-		}
+		PeopleListExercise.printPersons(persons);
 		
 		System.out.println("#".repeat(50));
 		
@@ -69,9 +65,16 @@ public class PeopleListExercise {
 		 * Sort the list of persons and print again.
 		 */
 		Collections.sort(persons, new PersonComparator());
-		for (Person p : persons) {
+		PeopleListExercise.printPersons(persons);		
+	}
+	
+	/**
+	 * Static helper method to print the list of persons.
+	 * @param list
+	 */
+	public static void printPersons(List<Person> list) {
+		for (Person p : list) {
 			System.out.println(p.toString());
 		}
-		
 	}
  }
