@@ -1,7 +1,5 @@
 package intro.programming.two;
 
-import java.util.Arrays;
-
 /****************************************************************************
  * <b>Title:</b> ArraysExercise.java
  * <b>Project:</b> brian.training
