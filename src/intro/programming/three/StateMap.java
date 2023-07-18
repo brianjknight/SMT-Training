@@ -35,7 +35,7 @@ public class StateMap {
 		    "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
 		    "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"};
 	
-	Map<String, String> map = new HashMap<>();
+	Map<String, String> mapOfStates = new HashMap<>();
 	
 	/**
 	 * Constructor instantiates a new StateMap object. 
@@ -43,7 +43,7 @@ public class StateMap {
 	 */
 	public StateMap() {
 		for (int i=0; i<ABBREVIATIONS.length; i++) {
-			map.put(ABBREVIATIONS[i], NAMES[i]);
+			mapOfStates.put(ABBREVIATIONS[i], NAMES[i]);
 		}
 	}
 
@@ -52,21 +52,21 @@ public class StateMap {
 	 * @param stateMap
 	 */
 	public void setStateMap(Map<String, String> stateMap) {
-		this.map = stateMap;
+		this.mapOfStates = stateMap;
 	}
 	
 	/**
 	 * Void method to print stateMap entry sets.
 	 */
 	public void displayStates() {
-		this.display(map);
+		this.display(mapOfStates);
 	}
 	
 	/**
 	 * Converts the stateMap HashMap to a TreeMap and displays the results.
 	 */
 	public void displayStatesOrdered() {
-		Map<String, String> statesOrdered = new TreeMap<>(map);
+		Map<String, String> statesOrdered = new TreeMap<>(mapOfStates);
 		this.display(statesOrdered);
 	}
 	
@@ -75,9 +75,7 @@ public class StateMap {
 	 */
 	public void displayStatesReverseOrdered() {
 		Map<String, String> statesReversed = new TreeMap<>(Collections.reverseOrder());
-		for (Map.Entry<String, String> e : map.entrySet()) {
-			statesReversed.put(e.getKey(), e.getValue());
-		}
+		statesReversed.putAll(mapOfStates);
 		this.display(statesReversed);
 	}
 	
