@@ -44,6 +44,7 @@ public class PeopleListExercise {
 			persons.add(p);
 		}
 		
+		
 		/**
 		 * Prints the initial list of persons.
 		 */
