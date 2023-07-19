@@ -3,7 +3,7 @@ package intro.programming.three;
 /****************************************************************************
  * <b>Title:</b> StateDemo.java
  * <b>Project:</b> brian.training
- * <b>Description:</b> CHANGE ME!!
+ * <b>Description:</b> Demo class with main method to call StateMap methods.
  * <b>Copyright:</b> Copyright (c) 2023
  * <b>Company:</b> Silicon Mountain Technologies
  * 

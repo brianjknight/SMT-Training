@@ -22,7 +22,7 @@ public class Person {
 	private String lastName;
 	
 	/**
-	 * Constructor instantiates a new person with a random id. 
+	 * Constructor instantiates a new person. 
 	 * @param firstName
 	 * @param lastName
 	 */
@@ -53,7 +53,6 @@ public class Person {
 	}
 	
 	
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(firstName, id, lastName);

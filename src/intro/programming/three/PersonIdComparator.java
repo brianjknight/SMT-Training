@@ -16,7 +16,7 @@ import java.util.Comparator;
  *  
  ****************************************************************************/
 
-public class PersonComparator implements Comparator<Person>{
+public class PersonIdComparator implements Comparator<Person>{
 	/**
 	 * Customer comparator which compares a Person based on their id attribute.
 	 */

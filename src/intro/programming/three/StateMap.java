@@ -21,12 +21,10 @@ import java.util.TreeMap;
 
 public class StateMap {
 	
-	// Array of state abbreviations for map keys.
 	private final String[] ABBREVIATIONS = {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
 		    "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
 		    "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 	
-	// Array of state name for map values.
 	private final String[] NAMES = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
 		    "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
 		    "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
@@ -80,7 +78,7 @@ public class StateMap {
 	}
 	
 	/**
-	 * Helper method to print the contents of a Map. 
+	 * Helper method to print the contents of a Map in new lines. 
 	 * @param map
 	 */
 	private void display(Map<String, String> map) {	

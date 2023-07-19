@@ -22,7 +22,6 @@ import java.util.List;
 public class PeopleListExercise {
 	public static void main(String[] args) {
 		
-		// Array of people to work with.
 		String[] characters = {
 				"Peter Venkman", "Ray Stantz", "Egon Spengler", "Winston Zeddemore", "Dana Barrett", "Louis Tully", "Janine Melnitz"
 		};
@@ -37,7 +36,6 @@ public class PeopleListExercise {
 		 */
 		List<Person> persons = new ArrayList<>();
 		int id = 1;
-		
 		for (String s : charactersList) {
 			String[] split = s.split(" ");
 			
@@ -46,25 +44,25 @@ public class PeopleListExercise {
 			persons.add(p);
 		}
 		
-		/*
+		/**
 		 * Prints the initial list of persons.
 		 */
 		PeopleListExercise.printPersons(persons);
-		
 		System.out.println("#".repeat(50));
+		
 		
 		/**
 		 * Shuffle the list of persons and print.
 		 */
 		Collections.shuffle(persons);
 		PeopleListExercise.printPersons(persons);
-		
 		System.out.println("#".repeat(50));
+		
 		
 		/**
 		 * Sort the list of persons and print again.
 		 */
-		Collections.sort(persons, new PersonComparator());
+		Collections.sort(persons, new PersonIdComparator());
 		PeopleListExercise.printPersons(persons);		
 	}
 	
@@ -72,7 +70,7 @@ public class PeopleListExercise {
 	 * Static helper method to print the list of persons.
 	 * @param list
 	 */
-	public static void printPersons(List<Person> list) {
+	private static void printPersons(List<Person> list) {
 		for (Person p : list) {
 			System.out.println(p.toString());
 		}
