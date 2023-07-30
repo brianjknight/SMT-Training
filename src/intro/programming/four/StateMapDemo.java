@@ -1,4 +1,4 @@
-package intro.programming.three;
+package intro.programming.four;
 
 /****************************************************************************
  * <b>Title:</b> StateDemo.java
@@ -15,7 +15,8 @@ package intro.programming.three;
  ****************************************************************************/
 
 public class StateMapDemo {
-	public static void main(String[] args) {
+		
+	public void run() {
 		StateMap mapOne = new StateMap();
 		mapOne.displayStates();
 		
@@ -25,6 +26,11 @@ public class StateMapDemo {
 		
 		System.out.println("#".repeat(50));
 		
-		mapOne.displayStatesReverseOrdered();
+		mapOne.displayStatesReverseOrdered();		
+	}
+	
+	public static void main(String[] args) {
+		StateMapDemo demo = new StateMapDemo();
+		demo.run();
 	}
 }
