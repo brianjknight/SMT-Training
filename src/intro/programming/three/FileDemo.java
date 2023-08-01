@@ -5,7 +5,7 @@ import java.io.FileReader;
 /****************************************************************************
  * <b>Title:</b> FileDemo.java
  * <b>Project:</b> brian.training
- * <b>Description:</b> SMT Intro to Programming Part III. 
+ * <b>Description:</b> SMT Intro to Programming Part III. Class to demo homework for FileReaderWriter & CapitalizeFile classes.
  * <b>Copyright:</b> Copyright (c) 2023
  * <b>Company:</b> Silicon Mountain Technologies
  * 
