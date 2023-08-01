@@ -44,7 +44,7 @@ public class FileReaderWriter {
 		this.rootFolder = rootFolder;
 	}
 
-	/**
+    /**
      * Method to returns a FileReader object given a specific file name to read in.
      * @param fileName - name of file to read provided in format file_name.file_type
      * @return new FileReader object.
