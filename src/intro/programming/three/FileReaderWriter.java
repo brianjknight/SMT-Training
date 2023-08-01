@@ -43,7 +43,7 @@ public class FileReaderWriter {
 	public void setRootFolder(String rootFolder) {
 		this.rootFolder = rootFolder;
 	}
-	
+
 	/**
      * Method to returns a FileReader object given a specific file name to read in.
      * @param fileName - name of file to read provided in format file_name.file_type
@@ -55,7 +55,7 @@ public class FileReaderWriter {
     	
     	return new FileReader(filePath);
     }
-    
+
     /**
      * Method returns a FileWriter which writes to the file name provided in the input parameter.
      * @param fileName - name of file to write to formated file_name.file_type

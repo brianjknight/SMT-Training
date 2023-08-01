@@ -18,9 +18,9 @@ import java.io.FileWriter;
  ****************************************************************************/
 
 public class CapitalizeFile {
-	
+
 	private FileReaderWriter readerWriter;
-	
+
 	/**
 	 * Constructor to instantiate a CapitalizeFile object taking in a FileReaderWriter.
 	 * @param readerWriter
@@ -28,14 +28,14 @@ public class CapitalizeFile {
 	public CapitalizeFile(FileReaderWriter readerWriter) {
 		this.readerWriter = readerWriter;
 	}
-	
+
 	/**
 	 * Method to read each character in a file, capitalize the character, then write to a file.
 	 * @param readFile - file to be read from.
 	 * @param writeFile - file to output to.
 	 */
 	public void capitalizeText(String readFile, String writeFile) {
-		
+
 		try {
 			FileReader reader = readerWriter.readFile(readFile);
 			FileWriter writer = readerWriter.writeFile(writeFile);
@@ -53,6 +53,4 @@ public class CapitalizeFile {
 		}
 		
 	}
-	
-	
 }

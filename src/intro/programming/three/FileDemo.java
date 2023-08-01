@@ -22,7 +22,7 @@ public class FileDemo {
 		FileDemo demo = new FileDemo();
 		demo.run();
 	}
-	
+
 	/**
 	 * Demo method to test FileReaderWriter and CapitalizeFile classes.
 	 */
@@ -30,7 +30,7 @@ public class FileDemo {
 		String rootPath = "/home/brian/eclipse-workspace/Training/brian.training/resources/";
 		
 		FileReaderWriter readerWriter = new FileReaderWriter(rootPath);
-		
+
 		/**
 		 * Read output.txt and print to terminal prior to writing to it.
 		 */
@@ -45,13 +45,13 @@ public class FileDemo {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
 		/**
 		 * Instantiate object to capitalize the file.
 		 */
 		CapitalizeFile capFile = new CapitalizeFile(readerWriter);
 		capFile.capitalizeText("quotes.txt", "output.txt");
-		
+
 		/**
 		 * Print resulting contents of output.txt.
 		 */
