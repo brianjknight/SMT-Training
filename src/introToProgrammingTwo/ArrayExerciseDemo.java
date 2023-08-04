@@ -1,4 +1,4 @@
-package intro.programming.two;
+package introToProgrammingTwo;
 
 /****************************************************************************
  * <b>Title:</b> ArrayExerciseDemo.java

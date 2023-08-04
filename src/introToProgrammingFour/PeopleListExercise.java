@@ -1,4 +1,4 @@
-package intro.programming.four;
+package introToProgrammingFour;
 
 import java.util.ArrayList;
 import java.util.Arrays;

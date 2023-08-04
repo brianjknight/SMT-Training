@@ -1,4 +1,4 @@
-package intro.programming.four;
+package introToProgrammingFour;
 
 /****************************************************************************
  * <b>Title:</b> StateDemo.java

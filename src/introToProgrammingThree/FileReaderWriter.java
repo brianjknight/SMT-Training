@@ -1,4 +1,4 @@
-package intro.programming.three;
+package introToProgrammingThree;
 
 import java.io.*;
 

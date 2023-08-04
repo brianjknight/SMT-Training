@@ -1,4 +1,4 @@
-package intro.programming.four;
+package introToProgrammingFour;
 
 import java.util.Collections;
 import java.util.HashMap;
