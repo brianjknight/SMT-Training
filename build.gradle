@@ -4,3 +4,7 @@
  * This is a general purpose Gradle build.
  * To learn more about Gradle by exploring our Samples at https://docs.gradle.org/8.2/samples
  */
+
+ //dependencies {
+ 	//implementation 'org.jsoup:jsoup:1.16.1'
+ //}
