@@ -34,15 +34,17 @@ public class WebpageCrawler {
 		
 		crawler.crawl(smtHome, "", "");
 		
+		System.out.println("CRAWL FINISHED");
+		
 		List<Webpage> webpages = crawler.getWebpages();
 		System.out.println("-".repeat(200));
-		System.out.println("Printing Webpages: \n");
+		System.out.println("Printing the webpages found: \n");
 		for (Webpage w : webpages) {
-			System.out.println(w.getTitle() + " " + w.getURL());
+			System.out.println("URL: " + w.getURL() + "\tTITLE: " + w.getTitle());
 		}
 		
 		System.out.println("-".repeat(200));
-		System.out.println("Printing html: \n");
+		System.out.println("Printing HTML for \"About Us\" page: \n");
 		System.out.println(crawler.getHtmlForPage("https://smt-stage.qa.siliconmtn.com/about"));
 		
 	}

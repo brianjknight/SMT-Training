@@ -25,6 +25,18 @@ import javax.net.ssl.SSLSocketFactory;
  ****************************************************************************/
 
 public class HtmlFetcher {
+	
+	public static void main(String[] args) throws MalformedURLException {
+		HtmlFetcher fetcher = new HtmlFetcher();
+		
+		String username = System.getenv("WC_USERNAME");
+		String password = System.getenv("WC_PASSWORD");
+		URL cacheStatsURL = new URL("https://smt-stage.qa.siliconmtn.com/sb/admintool?cPage=stats&actionId=FLUSH_CACHE");
+		
+		String smtCacheStats = fetcher.fetchHtml(cacheStatsURL, username, password);
+		
+		System.out.println(smtCacheStats);
+	}
 
 	/**
 	 * Method to visit a webpage and return a string of HTML for the page.
