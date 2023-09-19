@@ -1,10 +1,13 @@
 package webcrawler;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Base64;
 
 import javax.net.ssl.SSLSocket;
@@ -33,9 +36,11 @@ public class HtmlFetcher {
 		String password = System.getenv("WC_PASSWORD");
 		URL cacheStatsURL = new URL("https://smt-stage.qa.siliconmtn.com/sb/admintool?cPage=stats&actionId=FLUSH_CACHE");
 		
-		String smtCacheStats = fetcher.fetchHtml(cacheStatsURL, username, password);
+		String cacheStatsHtml = fetcher.fetchHtml(cacheStatsURL, username, password);
+		Webpage cacheStatsPage = new Webpage(cacheStatsURL, cacheStatsHtml, new HtmlParser());
 		
-		System.out.println(smtCacheStats);
+		System.out.println("Title: " + cacheStatsPage.getTitle());
+		System.out.println("HTML: \n" + cacheStatsPage.getHtml());
 	}
 
 	/**
@@ -48,8 +53,7 @@ public class HtmlFetcher {
 	public String fetchHtml(URL url, String username, String password) {
 		StringBuilder html = new StringBuilder();
         
-        SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-        try (SSLSocket socket = (SSLSocket) sslSocketFactory.createSocket(url.getHost(), url.getDefaultPort())){
+        try (Socket socket = createSocket(url)) {	
             OutputStream out = socket.getOutputStream();
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
@@ -73,5 +77,21 @@ public class HtmlFetcher {
         }
         
         return html.toString();
+	}
+	
+	/**
+	 * Returns socket type based on URL protocol.
+	 * @param url
+	 * @return
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
+	private Socket createSocket(URL url) throws UnknownHostException, IOException {
+		if (url.getProtocol().equals("https")) {
+			SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+			return sslSocketFactory.createSocket(url.getHost(), url.getDefaultPort());
+		} else {
+			return new Socket(url.getHost(), url.getDefaultPort());
+		}
 	}
 }

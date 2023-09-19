@@ -24,7 +24,7 @@ import org.jsoup.nodes.Element;
  ****************************************************************************/
 
 public class HtmlParser {
-	
+
 	/**
 	 * Finds all elements for the given tag in the given HTML string. 
 	 * @param html
@@ -45,7 +45,7 @@ public class HtmlParser {
 	public String parseTitle(String html) {
 		Document doc = Jsoup.parse(html);
 		
-		return doc.selectFirst("title").text();
+		return doc.selectFirst("title") == null ? "NO TITLE FOUND" : doc.selectFirst("title").text();
 	}
 	
 	
