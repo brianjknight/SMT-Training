@@ -2,6 +2,7 @@ package testPackage;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /****************************************************************************
@@ -19,11 +20,11 @@ import java.net.URL;
  ****************************************************************************/
 
 public class URLTest {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, URISyntaxException {
 		URL url;
 		
 		try {
-			url = new URL("https://smt-stage.qa.siliconmtn.com/about");
+			url = new URL("https://smt-stage.qa.siliconmtn.com/");
 			System.out.println("url: " + url);
 			System.out.println("protocol: " + url.getProtocol());
 			System.out.println("host: " + url.getHost());
@@ -31,6 +32,7 @@ public class URLTest {
 			System.out.println("defaultPort: " + url.getDefaultPort());
 			System.out.println("content: " + url.getContent());
 			System.out.println("file: " + url.getFile());
+			System.out.println("uri: " + url.toURI());
 			
 			
 		} catch (MalformedURLException e) {
