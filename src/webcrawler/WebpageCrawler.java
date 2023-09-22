@@ -1,6 +1,6 @@
 package webcrawler;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +24,7 @@ import java.util.Set;
  ****************************************************************************/
 
 public class WebpageCrawler {
-	public static void main(String[] args) throws MalformedURLException {
+	public static void main(String[] args) throws IOException {
 		
 		WebpageCrawler crawler = new WebpageCrawler(new HtmlFetcher(), new HtmlParser());
 		URL smtHome = new URL("https://smt-stage.qa.siliconmtn.com/");
@@ -94,9 +94,9 @@ public class WebpageCrawler {
 	 * @param url - starting URL to crawl from.
 	 * @param username - empty string or username if required for login
 	 * @param password - empty string or password if required for login
-	 * @throws MalformedURLException
+	 * @throws IOException 
 	 */
-	public void crawl(URL url, String username, String password) throws MalformedURLException {
+	public void crawl(URL url, String username, String password) throws IOException {
 		updateCollections(url, username, password);
 		
 		while (!notVisitedLinks.isEmpty()) {
@@ -110,8 +110,9 @@ public class WebpageCrawler {
 	 * @param url - URL of the page to search.
 	 * @param username - empty string or username if required for login
 	 * @param password - empty string or password if required for login
+	 * @throws IOException 
 	 */
-	private void updateCollections(URL url, String username, String password) {
+	private void updateCollections(URL url, String username, String password) throws IOException {
 		String html = fetcher.fetchHtml(url, username, password);
 		Webpage page = new Webpage(url, html, parser);
 		

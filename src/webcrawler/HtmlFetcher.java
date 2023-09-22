@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -32,7 +31,7 @@ import javax.net.ssl.SSLSocketFactory;
 
 public class HtmlFetcher {
 	
-	public static void main(String[] args) throws MalformedURLException {
+	public static void main(String[] args) throws IOException {
 		HtmlFetcher fetcher = new HtmlFetcher();
 		
 		String username = System.getenv("WC_USERNAME");
@@ -53,27 +52,90 @@ public class HtmlFetcher {
 	 * @param username - empty string or username if required for login
 	 * @param password - empty string or password if required for login
 	 * @return
+	 * @throws IOException 
 	 */
-	public String fetchHtml(URL url, String username, String password) {
-		StringBuilder html = new StringBuilder();
+	public String fetchHtml(URL url, String username, String password) throws IOException {
 		
-		// Use socket to send POST request to login and retrieve cookies.
-        try (Socket socket = createSocket(url)) {
-    		OutputStream out = socket.getOutputStream();
+		sendPostRequest(url, username, password);
+		
+		return sendGetRequest(url);
+	}
+	
+	/**
+	 * Returns socket type based on URL protocol.
+	 * @param url
+	 * @return
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
+	private Socket createSocket(URL url) throws IOException {
+		if (url.getProtocol().equals("https")) {
+			SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+			return sslSocketFactory.createSocket(url.getHost(), url.getDefaultPort());
+		} else {
+			return new Socket(url.getHost(), url.getDefaultPort());
+		}
+	}
+	
+	/**
+	 * Uses a socket to send a post request with login credentials and retrieve cookies for a session.
+	 * @param socket
+	 * @param out
+	 * @param url
+	 * @param username
+	 * @param password
+	 * @throws IOException
+	 */
+	private void sendPostRequest(URL url, String username, String password) throws IOException {
+        try (Socket socket = createSocket(url)){
+        	OutputStream out = socket.getOutputStream();
     		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     		
-    		sendPostRequest(socket, out, in, url, username, password);
+    		String postRequestBody = "requestType=" + URLEncoder.encode("reqBuild", "UTF-8") +
+    				"&pmid=" + URLEncoder.encode("ADMIN_LOGIN", "UTF-8") +
+    				"&emailAddress=" + URLEncoder.encode(username, "UTF-8") +
+    				"&password=" + URLEncoder.encode(password, "UTF-8") +
+    				"&l=" + URLEncoder.encode("", "UTF-8");
     		
-    		socket.close();
-    		in.close();       	
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        
-        // TODO refactor as helper method to call in fetchHtml
-        // Once cookies are available send GET request to retrieve the HTML
-        try (Socket socket = createSocket(url)) {
+    		String requestHeaders = "POST " + url.getFile() + " HTTP/1.1\r\n" +
+    				"Host: " + url.getHost() + "\r\n" +
+    				"Content-Length: " + postRequestBody.length() + "\r\n" +
+    				"Content-Type: application/x-www-form-urlencoded\r\n" +
+    				"\r\n" + postRequestBody + "\r\n" +
+    				"Connection: close\r\n\r\n";
+    		
+    		out.write(requestHeaders.getBytes());
+    		out.flush();
+    		
+    		// save cookies
+    		String line;
+    		while ((line = in.readLine()) != null) {
+    			if (!cookies.containsKey(url.getHost())) {
+    				cookies.put(url.getHost(), new HashSet<>());
+    			}
+    			if (line.startsWith("Set-Cookie")) {
+    				cookies.get(url.getHost()).add(line);
+    			}
+    		}
+    		
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+    }
+	
+	/**
+	 * Uses a socket to send a GET request with cookies to retrieve HTML of a webpage.
+	 * @param socket
+	 * @param out
+	 * @param in
+	 * @param url
+	 * @param html
+	 * @throws IOException
+	 */
+	private String sendGetRequest(URL url) throws IOException {
+		StringBuilder html = new StringBuilder();
+		
+		try (Socket socket = createSocket(url)) {
         	OutputStream out = socket.getOutputStream();
         	BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         	
@@ -108,72 +170,5 @@ public class HtmlFetcher {
         }
         
         return html.toString();
-	}
-	
-	/**
-	 * Returns socket type based on URL protocol.
-	 * @param url
-	 * @return
-	 * @throws UnknownHostException
-	 * @throws IOException
-	 */
-	private Socket createSocket(URL url) throws UnknownHostException, IOException {
-		if (url.getProtocol().equals("https")) {
-			SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-			return sslSocketFactory.createSocket(url.getHost(), url.getDefaultPort());
-		} else {
-			return new Socket(url.getHost(), url.getDefaultPort());
-		}
-	}
-	
-	/**
-	 * Uses a socket to send a post request with login credentials and retrieve cookies for a session.
-	 * @param socket
-	 * @param out
-	 * @param url
-	 * @param username
-	 * @param password
-	 * @throws IOException
-	 */
-	private void sendPostRequest(Socket socket, OutputStream out, BufferedReader in, URL url, String username, String password) throws IOException {
-        String postRequestBody = "requestType=" + URLEncoder.encode("reqBuild", "UTF-8") +
-                "&pmid=" + URLEncoder.encode("ADMIN_LOGIN", "UTF-8") +
-                "&emailAddress=" + URLEncoder.encode(username, "UTF-8") +
-                "&password=" + URLEncoder.encode(password, "UTF-8") +
-                "&l=" + URLEncoder.encode("", "UTF-8");
-
-        String requestHeaders = "POST " + url.getFile() + " HTTP/1.1\r\n" +
-                "Host: " + url.getHost() + "\r\n" +
-                "Content-Length: " + postRequestBody.length() + "\r\n" +
-                "Content-Type: application/x-www-form-urlencoded\r\n" +
-                "\r\n" + postRequestBody + "\r\n" +
-                "Connection: close\r\n\r\n";
-
-        out.write(requestHeaders.getBytes());
-        out.flush();
-        
-        // save cookies
-        String line;
-        while ((line = in.readLine()) != null) {
-            if (!cookies.containsKey(url.getHost())) {
-                cookies.put(url.getHost(), new HashSet<>());
-            }
-            if (line.startsWith("Set-Cookie")) {
-                cookies.get(url.getHost()).add(line);
-            }
-        }
-    }
-	
-	/**
-	 * Uses a socket to send a GET request with cookies to retrieve HTML of a webpage.
-	 * @param socket
-	 * @param out
-	 * @param in
-	 * @param url
-	 * @param html
-	 * @throws IOException
-	 */
-	private void sendGetRequest(Socket socket, OutputStream out, BufferedReader in, URL url, StringBuilder html) throws IOException {
-		// TODO create method
     }
 }
