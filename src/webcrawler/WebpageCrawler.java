@@ -27,7 +27,6 @@ public class WebpageCrawler {
 	public static void main(String[] args) throws MalformedURLException {
 		
 		WebpageCrawler crawler = new WebpageCrawler(new HtmlFetcher(), new HtmlParser());
-		
 		URL smtHome = new URL("https://smt-stage.qa.siliconmtn.com/");
 		
 		System.out.println("STARTING CRAWL...\n");

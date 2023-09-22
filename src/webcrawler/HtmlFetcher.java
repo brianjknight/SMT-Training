@@ -94,17 +94,11 @@ public class HtmlFetcher {
         	out.write("\r\n".getBytes());
         	out.flush();
         	
+        	// write the html
         	String line = null;
         	while ((line = in.readLine()) != null) {
         		html.append(line);
         		html.append("\n");
-        		
-        		if (!cookies.keySet().contains(url.getHost())) {
-        			cookies.put(url.getHost(), new HashSet<>());
-        		}
-        		if (line.contains("Cookie")) {
-        			cookies.get(url.getHost()).add(line);
-        		}
         	}
         	
         	socket.close();
@@ -112,7 +106,6 @@ public class HtmlFetcher {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
         
         return html.toString();
 	}
@@ -165,7 +158,7 @@ public class HtmlFetcher {
             if (!cookies.containsKey(url.getHost())) {
                 cookies.put(url.getHost(), new HashSet<>());
             }
-            if (line.contains("Cookie")) {
+            if (line.startsWith("Set-Cookie")) {
                 cookies.get(url.getHost()).add(line);
             }
         }
