@@ -5,6 +5,6 @@
  * To learn more about Gradle by exploring our Samples at https://docs.gradle.org/8.2/samples
  */
 
- //dependencies {
- 	//implementation 'org.jsoup:jsoup:1.16.1'
- //}
+// dependencies {
+ //	implementation 'org.jsoup:jsoup:1.16.1'
+// }

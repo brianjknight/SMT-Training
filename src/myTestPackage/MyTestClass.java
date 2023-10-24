@@ -1,7 +1,8 @@
-package testPackage;
+package myTestPackage;
+
 
 /****************************************************************************
- * <b>Title:</b> TestingClass.java
+ * <b>Title:</b> MyTestClass.java
  * <b>Project:</b> brian.training
  * <b>Description:</b> CHANGE ME!!
  * <b>Copyright:</b> Copyright (c) 2023
@@ -9,21 +10,14 @@ package testPackage;
  * 
  * @author Brian Knight
  * @version 3.x
- * @since Sep 18, 2023
+ * @since Oct 24, 2023
  * <b>updates:</b>
  *  
  ****************************************************************************/
 
-public class TestingClass {
+public class MyTestClass {
+
 	public static void main(String[] args) {
-		TestingClass t = new TestingClass();
-		
-		t.helper(5);
-//		t.helper(null);
-		
-	}
-	
-	public void helper(int k) {
-		System.out.println(k);
+		System.out.println("hello world");
 	}
 }

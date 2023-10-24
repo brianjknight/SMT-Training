@@ -1,4 +1,4 @@
-package testPackage;
+package myTestPackage;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
