@@ -1,5 +1,7 @@
 package myTestPackage;
 
+import java.util.*;
+
 /****************************************************************************
  * <b>Title:</b> KataClass.java
  * <b>Project:</b> brian.training
@@ -15,6 +17,5 @@ package myTestPackage;
  ****************************************************************************/
 
 public class KataClass {
-
-	
+	  
 }
