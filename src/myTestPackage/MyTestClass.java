@@ -1,5 +1,6 @@
 package myTestPackage;
 
+import java.util.Arrays;
 
 /****************************************************************************
  * <b>Title:</b> MyTestClass.java
@@ -19,5 +20,12 @@ public class MyTestClass {
 
 	public static void main(String[] args) {
 		System.out.println("hello world");
+		
+		String color = "2 red";
+		
+		String[] colorsStrings = color.split(",");
+		
+		System.out.println(Arrays.toString(colorsStrings));
+		
 	}
 }

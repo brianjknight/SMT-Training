@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdventOfCode {
+public class Day1 {
 
 	public int day1() throws FileNotFoundException, IOException {
 		int sum = 0;
@@ -81,7 +81,7 @@ public class AdventOfCode {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		AdventOfCode avc = new AdventOfCode();
+		Day1 avc = new Day1();
 		System.out.println(avc.day1());
 	}
 }
