@@ -1,7 +1,6 @@
 package adventOfCode;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class Day2 {
 	int[] rgbLimits = {12,13,14};
@@ -10,7 +9,7 @@ public class Day2 {
 	
 	void evaluateGames() throws IOException {
 		// read each line in the file
-		File input = new File("/home/brian/project-workspace/brian.training/src/adventOfCode/resources/day-2-input.txt");
+		File input = new File("src/adventOfCode/resources/day-2-input.txt");
 		try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
 			String line;
 			

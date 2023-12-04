@@ -14,7 +14,7 @@ public class Day1 {
 		int sum = 0;
 		
 		// read each line of the input
-		File input = new File("/home/brian/project-workspace/brian.training/src/adventOfCode/resources/calibration-values.txt");
+		File input = new File("src/adventOfCode/resources/day-1-input.txt");
 		try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
 			String line;
 			

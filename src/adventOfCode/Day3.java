@@ -17,7 +17,7 @@ public class Day3 {
 	
 	
 	void convertEngine () throws IOException {
-		File input = new File("/home/brian/project-workspace/brian.training/src/adventOfCode/resources/day-3-input.txt");
+		File input = new File("src/adventOfCode/resources/day-3-input.txt");
 		try (BufferedReader reader = new BufferedReader (new FileReader(input))) {
 			String line;
 			int lineNumber = 0;
