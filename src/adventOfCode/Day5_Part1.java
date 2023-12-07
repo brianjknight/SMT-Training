@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Day5 {
+public class Day5_Part1 {
 	static List<Long> seedsList = new ArrayList<>();
 	
 	static List<long[]> seed_soil_map = new ArrayList<>();
@@ -19,7 +19,7 @@ public class Day5 {
 	static List<long[]> light_temp_map = new ArrayList<>();
 	static List<long[]> temp_hum_map = new ArrayList<>();
 	static List<long[]> hum_loc_map = new ArrayList<>();
-		
+	
 	// Part 1
 	void fillSeedsSimple() {
 //		String[] seedsInput = {"79","14","55","13"};
@@ -30,46 +30,7 @@ public class Day5 {
 			seedsList.add(Long.parseLong(s));
 		}
 	}
-	
-	// Part 2
-	void fillSeedsFromRanges() {
-		//String[] seedsInput = {"79","14","55","13"};
-		String seedsString = "432563865 39236501 1476854973 326201032 1004521373 221995697 2457503679 46909145 603710475 11439698 1242281714 12935671 2569215463 456738587 3859706369 129955069 3210146725 618372750 601583464 1413192";
-		String seedsInput[] = seedsString.split(" ");
 		
-		// break into seed ranges
-//		List<List<List<Long>>> seedRangesList = new ArrayList<>();
-		
-		for (int i=16; i<18; i+=2) {
-//			long startSeed = Long.parseLong(seedsInput[i]);
-//			long seedRange = Long.parseLong(seedsInput[i+1]) / 5;
-//			long endSeed = startSeed +  seedRange;
-//			for (int j = 0; j < seedRange; j++) {
-//				seedsList.add(startSeed + j);
-//			}
-			
-			// 1/10 range size
-			long seedRange = Long.parseLong(seedsInput[i+1]);
-			long tenthRange = seedRange / 10;
-
-			long a = Long.parseLong(seedsInput[i]);
-			long b = a + tenthRange;
-			long c = b + tenthRange;
-			long d = c + tenthRange;
-			long e = d + tenthRange;
-			long f = e + tenthRange;
-			long g = f + tenthRange;
-			long h = g + tenthRange;
-			long k = h + tenthRange;
-			long m = k + tenthRange + (seedRange % 10);
-			
-			for (int j=0; j < tenthRange; j++) {
-				seedsList.add(a + j);
-			}
-			
-		}
-	}
-	
 	// Convert the input file to data
 	void convertInput() throws IOException {
 				
@@ -158,7 +119,6 @@ public class Day5 {
 	
 	// convert to the next destination number for each map until location is returned.
 	Long findSmalletsLocationNew() {
-		System.gc();
 		List<Long> locations = new ArrayList<>();
 		
 		// create list of ranges for each input map
@@ -187,71 +147,12 @@ public class Day5 {
 		return locations.get(0);
 	}
 	
-	List<Long> locationsPart2 = new ArrayList<>();
-	
-	void evaluateOneSeedAndRating(long startSeed, long endSeed, long totalRangeSize, long nthRanges) {
-		// start with empty list
-		List<Long> newSeedsList = new ArrayList<>();
-
-		long nthRangeSize = totalRangeSize / nthRanges;
-		System.out.println("nthRangeSize=" + nthRangeSize);
-		for (int i=0; i<nthRangeSize; i++) {
-			if(i !=0 && i % 200 == 0 ) {
-				System.out.println("evaluateOneSeedAndRating loop #" + i);
-			}
-			// start at startRange and increment ranges to test
-			long curStart = startSeed + (i * nthRangeSize); 
-		
-			// the last range check needs to include remainder
-			if (i==nthRangeSize-1) {
-				curStart += totalRangeSize % nthRanges;
-			}
-					
-			// add seed numbers to list
-			for (int j=0; j<nthRangeSize; j++) {
-				seedsList.add(curStart + j);
-			}
-
-			// now have a partial list of seeds for the current map
-			// evaluate current list of seeds for smallest location
-			long curSmallestLocation = evaluatePartOfRange();
-			locationsPart2.add(curSmallestLocation);
-			System.gc();
-		}
-	}
-	
-	// method to evaluate parts of a range
-	long evaluatePartOfRange() {
-		System.gc();
-		return findSmalletsLocationNew();
-	}
-	
 	public static void main(String[] args) throws IOException {
 		Day5 d5 = new Day5();
-//		d5.fillSeedsSimple();
-//		d5.fillSeedsFromRanges();
+		d5.fillSeedsSimple();
 		d5.convertInput();
 		
-//		Long smallestLocation = d5.findSmalletsLocationNew();
-//		System.out.println("smallest loc = " + smallestLocation);
-		
-		String seedsString = "432563865 39236501 1476854973 326201032 1004521373 221995697 2457503679 46909145 603710475 11439698 1242281714 12935671 2569215463 456738587 3859706369 129955069 3210146725 618372750 601583464 1413192";
-		String seedsInput[] = seedsString.split(" ");
-		
-		for (int i=0; i<20; i+=2) {
-			System.out.println("main iteration: " + i + "," + (i+1));
-			long startSeed = Long.parseLong(seedsInput[i]);
-			long curTotalRangeSize = Long.parseLong(seedsInput[i+1]);
-			
-			long nthRanges = 1000;
-			long endSeed = startSeed + curTotalRangeSize;
-			
-			d5.evaluateOneSeedAndRating(startSeed, endSeed, curTotalRangeSize, nthRanges);
-			System.gc();
-		}
-		
-		Collections.sort(d5.locationsPart2);
-		System.out.println("part 2 answer = " + d5.locationsPart2.get(0));
+		Long smallestLocation = d5.findSmalletsLocationNew();
+		System.out.println("smallest loc = " + smallestLocation);
 	}
-	
 }
