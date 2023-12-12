@@ -12,6 +12,9 @@ public class Day10 {
 	char[][] gridCopy;
 	int[] start = new int[2];
 	
+	// final answer
+	// 13728 total pipes
+	// half pipes/steps to middle = 6864
 	
 	// Use the input to create a 2D map
 	Day10(int gridSize, String path) throws IOException {
