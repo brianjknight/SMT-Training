@@ -14,6 +14,7 @@ public class Day11 {
 	// convert input to 2D List
 	List<String> rawInput = new ArrayList<>();
 	List<List<Character>> universe = new ArrayList<>();
+	
 	Map<Integer,int[]> galaxyMap = new HashMap<>();
 	
 	List<Integer> emptyRows = new ArrayList<>();
@@ -60,8 +61,6 @@ public class Day11 {
 	// map the location of each galaxy Map<Integer, int loc[]
 	void mapGalaxies() {
 		int galNum = 1;
-		
-		// add -1 key for total number of galaxies
 
 		for (int row=0; row<universe.size(); row ++) {
 			for (int col=0; col<universe.get(0).size(); col++) {
@@ -72,9 +71,9 @@ public class Day11 {
 			}
 		}
 		
+		// add -1 key for total number of galaxies
 		galaxyMap.put(-1,new int[] {galNum-1});
 	}
-	
 	
 	// create all the unique pairs
 	List<int[]> findUniquePairs() {
@@ -88,7 +87,6 @@ public class Day11 {
 		
 		return uniquePairs;
 	}
-	
 	
 	// Part 2 find distance while inserting rows and columns
 	long findDistance(int[] galLoc1, int[] galLoc2, int nInserts) {
