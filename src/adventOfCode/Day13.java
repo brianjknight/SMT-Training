@@ -51,6 +51,8 @@ public class Day13 {
 	
 	// find matching rows and cols to later determine if it is vertical or horizontal
 	List<List<int[]>> findvertHorNeighborMatches(char[][] pattern) {
+//		System.out.println("findvertHorNeighborMatches**********");
+		
 		List<List<int[]>> vertHorNeighborMatches = new ArrayList<>();
 		
 //		System.out.println("findVertHorNeigh:");
@@ -95,87 +97,193 @@ public class Day13 {
 		}
 		vertHorNeighborMatches.add(rowMatches);
 		
+//		for (List<int[]> list : vertHorNeighborMatches) {
+//			for (int[] i : list) { 
+//				System.out.println(Arrays.toString(i));
+//			}
+//		}
+		
+//		System.out.println("findvertHorNeighborMatches**********");
 		return vertHorNeighborMatches;
 	}
 	
-	// determine vertical or horizontal mirror given matches lists
-	boolean isHorizontalMatch(List<List<int[]>> neighborMatches, char[][] pattern) {
-		// start from the middle most row matches
-		List<int[]> horzMatches = neighborMatches.get(1);
-		if (horzMatches.size() == 0) {
-			return false;
-		}
+	// find largest horizontal mirror line
+	int[] findLargestHorzMirror(List<int[]> horzMatches , char[][] pattern) {
+		int largestMirrorSize = 0;
+		int[] largestMirrorLine = new int[3];
 		
-		int[] middleNeighbors = horzMatches.get(horzMatches.size()/2);
-		int mirrorRow = middleNeighbors[0];
-		
-		int topInd = mirrorRow;
-		int bottomInd = mirrorRow + 1;
-		
-		
-		while (topInd >= 0 && bottomInd < pattern.length) {
-			String top = new String(pattern[topInd]);
-			String bottom = new String(pattern[bottomInd]);
+		for (int[] match : horzMatches) {
+			int topInd = match[0];
+			int botInd = match[1];
 			
-			if (!top.equals(bottom)) {
-				return false;
-			}
-			topInd--;
-			bottomInd++;
+			int curLargestMirSize = 0;
+			
+			while (topInd >= 0 && botInd < pattern.length) {
+				String top = new String(pattern[topInd]);
+				String bottom = new String(pattern[botInd]);
+				
+				if (!top.equals(bottom)) {
+//					if (topInd == 0 || botInd == pattern.length-1) {
+//						if (curLargestMirSize > largestMirrorSize) {
+//							largestMirrorSize = curLargestMirSize;
+//							largestMirrorLine[0] = match[0];
+//							largestMirrorLine[1] = match[1];
+//						}
+//					}
+					
+					break;
+				}
+				 
+				if (topInd == 0 || botInd == pattern.length-1) {
+					curLargestMirSize++;
+					if (curLargestMirSize > largestMirrorSize) {
+						largestMirrorSize = curLargestMirSize;
+						largestMirrorLine[0] = match[0];
+						largestMirrorLine[1] = match[1];
+					}
+					break;
+				}
+				
+				curLargestMirSize++;
+				topInd--;
+				botInd++;
+			} 
 		}
 		
-		return true;
+		largestMirrorLine[2] = largestMirrorSize;
+		return largestMirrorLine;
 	}
 	
-
-	int findNumberForPattern(char[][] pattern) {
-		int number = 0;
+	int[] findLargestVertMirror(List<int[]> vertMatches , char[][] pattern) {
+//		System.out.println("findLargestVertMirror^^^^^^^^^^^^");
 		
+		int largestMirrorSize = 0;
+		int[] largestMirrorLine = new int[3];
+		
+		for (int[] match : vertMatches) {
+//			System.out.println("match: " + Arrays.toString(match));
+			int leftInd = match[0];
+			int rightInd = match[1];
+//			System.out.println("leftInd=" + leftInd + " rightInd=" + rightInd);
+			
+			int curLargMirSize = 0;
+			
+			while (leftInd  >= 0 && rightInd < pattern[0].length) {
+//				System.out.println("curLargMirsiz: " + curLargMirSize);
+				String left = "";
+				String right = "";
+				
+				
+				for (char[] row : pattern) {
+					left += row[leftInd];
+					right += row[rightInd];
+				}
+//				System.out.println("leftInd: " + leftInd + " left: " + left);
+//				System.out.println("rightInd: " + rightInd + " right: " + right);
+//				System.out.println("left.equalsright:" + left.equals(right));
+				
+				if (!left.equals(right)) {
+					if (leftInd == 0 || rightInd == pattern[0].length-1) {
+						if (curLargMirSize > largestMirrorSize) {
+							largestMirrorSize = curLargMirSize;
+							largestMirrorLine[0] = match[0];
+							largestMirrorLine[1] = match[1];
+						}
+					}
+					
+					break;
+				}
+				
+				if (leftInd == 0 || rightInd == pattern[0].length-1) {
+					curLargMirSize++;
+					if (curLargMirSize > largestMirrorSize) {
+						largestMirrorSize = curLargMirSize;
+						largestMirrorLine[0] = match[0];
+						largestMirrorLine[1] = match[1];
+					}
+					break;
+				}
+				
+				curLargMirSize++;
+				leftInd--;
+				rightInd++;
+			}
+			
+		}
+		largestMirrorLine[2] = largestMirrorSize;
+		
+//		System.out.println("return: " + Arrays.toString(largestMirrorLine));
+//		System.out.println("findLargestVertMirror^^^^^^^^^^^^");
+		return largestMirrorLine;
+	}
+	
+	int findNumForPattern(char[][] pattern) {
+		int num = 0;
 		List<List<int[]>> neighborMatches = findvertHorNeighborMatches(pattern);
 		
-		boolean isHorizontal = isHorizontalMatch(neighborMatches, pattern);
-		System.out.println("findNumForPat isHorizontal: " + isHorizontal);
 		
-		if (isHorizontal) {
-			List<int[]> horzMatches = neighborMatches.get(1);
-			int[] middleNeighbors = horzMatches.get(horzMatches.size()/2);
-			int mirrorRow = middleNeighbors[0];
-//			System.out.println("mirrorRow:" + mirrorRow);
+		int[] largestHorzMirror = findLargestHorzMirror(neighborMatches.get(1), pattern);
+		int[] largestVertMirror = findLargestVertMirror(neighborMatches.get(0), pattern);
+		
+		
+		if (largestHorzMirror[2] > largestVertMirror[2]) {
+			int mirrorRow = largestHorzMirror[0];
 			int rowsAboveMirror = mirrorRow + 1;
-			number = rowsAboveMirror * 100;
+			num = rowsAboveMirror * 100;
 		}
 		else {
-			List<int[]> vertMatches = neighborMatches.get(0);
-			System.out.println("vertMatches in findNumForPat: " + vertMatches);
-			int[] middleNeighbors = vertMatches.get(vertMatches.size()/2);
-			int mirrorCol = middleNeighbors[0];
-//			System.out.println("mirroCol:" + mirrorCol);
+			int mirrorCol = largestVertMirror[0];
 			int colsLeftMirrorLine = mirrorCol + 1;
-			number = colsLeftMirrorLine;
+			num = colsLeftMirrorLine;
 		}
 		
-		return number;
+		if (largestHorzMirror[2] > 0 && largestVertMirror[2] > 2) {
+			System.out.println("found horz & vert mirrors");
+			
+			for(char[] p : pattern) {
+				for (char c : p) {
+					System.out.print(c);
+				}
+				System.out.println("");
+			}
+			
+			System.out.println("horz: " + Arrays.toString(largestHorzMirror));
+			System.err.println("vert: " + Arrays.toString(largestVertMirror));
+			
+			System.out.println("return num for pattern = " + num);
+		}
+		
+		return num;
 	}
 	
 	// find all resulsts for patterns
-	int findAllNumbersForPatters() {
+	int findAllNumbersForPatterns() {
+//		System.out.println("findAllNumbersForPatterns************");
 		int total = 0;
 
 		int patternInd = 0;
 		
 		for (char[][] pattern : allPatterns) {
-			total += findNumberForPattern(pattern);
-			System.out.println("patternInd: " + patternInd);
-			if (patternInd == 9) {
-				System.out.println("patter:");
-				for (char[] p : pattern) {
-					System.out.println(Arrays.toString(p));
-				}
-			}
+//			System.out.println("patternInd: " + patternInd);
+//			for(char[] p : pattern) {
+//				for (char c : p) {
+//					System.out.print(c);
+//				}
+//				System.out.println("");
+//			}
+			
+			
+			total += findNumForPattern(pattern);
+//			if (patternInd == 9) {
+//				System.out.println("patter:");
+//				for (char[] p : pattern) {
+//					System.out.println(Arrays.toString(p));
+//				}
+//			}
 				
 			patternInd++;
 		}
-		
+//		System.out.println("findAllNumbersForPatterns************\n");
 		return total;
 	}
 	
@@ -195,7 +303,14 @@ public class Day13 {
 //		}
 		
 		char[][] pattern = d.allPatterns.get(0);
-
+//
+		for(char[] p : pattern) {
+			for (char c : p) {
+				System.out.print(c);
+			}
+			System.out.println("");
+		}
+		
 		// test findvertHorNeighborMatches line
 		List<List<int[]>> vertHorNeighborMatches =  d.findvertHorNeighborMatches(pattern);
 		System.out.println("vert mathces:");
@@ -206,20 +321,34 @@ public class Day13 {
 		for (int[] horiz : vertHorNeighborMatches.get(1)) {
 			System.out.println(Arrays.toString(horiz));
 		}
-		
-		
-		// test isHorizontalMatch
-		boolean isHorizontal = d.isHorizontalMatch(vertHorNeighborMatches, pattern);
-		System.out.println("isHorizontal = " + isHorizontal);
 	
+		int[] largestHorzMirrorLine = d.findLargestHorzMirror(vertHorNeighborMatches.get(1), pattern);
+		System.out.println("largestHorzMirrorLine: " + Arrays.toString(largestHorzMirrorLine));
+		
+		int[] largestVertMirLine = d.findLargestVertMirror(vertHorNeighborMatches.get(0), pattern);
+		System.out.println("largestVertMirLine: " + Arrays.toString(largestVertMirLine));
+				
 		// test number lines for pattern
-		int num = d.findNumberForPattern(pattern);
-		System.out.println("num: " + num);
+		int num = d.findNumForPattern(pattern);
+		System.out.println("num for pattern = " + num);
+		 
+//		int num = d.findNumberForPattern(pattern);
+//		System.out.println("num: " + num);
 	
-		System.out.println("allPatterns size:" + d.allPatterns.size());
-//		System.out.println(Arrays.toString(d.allPatterns.get(0)) );
+//		int solution = d.findAllNumbersForPatterns();
+//		System.out.println("solution = " + solution);
 		
-		int solution = d.findAllNumbersForPatters();
-		System.out.println("solution = " + solution);
+//		System.out.println("pattern count = " + d.allPatterns.size());
+		
+//		char[][] last = d.allPatterns.get(99);
+//		for(char[] p : last) {
+//			for (char c : p) {
+//				System.out.print(c);
+//			}
+//			System.out.println("");
+//		}
+		
+		int answer = d.findAllNumbersForPatterns();
+		System.out.println("answer = " + answer);
 	}
 }

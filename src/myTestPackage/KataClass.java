@@ -1,6 +1,7 @@
 package myTestPackage;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /****************************************************************************
  * <b>Title:</b> KataClass.java
@@ -17,5 +18,5 @@ import java.util.*;
  ****************************************************************************/
 
 public class KataClass {
-	  
+	
 }
