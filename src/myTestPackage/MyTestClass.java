@@ -1,6 +1,7 @@
 package myTestPackage;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /****************************************************************************
  * <b>Title:</b> MyTestClass.java
@@ -19,13 +20,23 @@ import java.util.Arrays;
 public class MyTestClass {
 
 	public static void main(String[] args) {
-		System.out.println("hello world");
 		
-		String color = "2 red";
+		Map<String, Double> one = new HashMap<>();
+		one.put("A", 1.0);
+		one.put("B", 1.0);
+		one.put("C", 1.0);
 		
-		String[] colorsStrings = color.split(",");
+		Map<String, Double> two = new HashMap<>();
+		two.put("A", 1.0);
+		two.put("B", 1.0);
+		two.put("C", 1.0);
+		two.put("D", 1.0);
+		two.put("E", 1.0);
 		
-		System.out.println(Arrays.toString(colorsStrings));
+		Map<String, Double> combined = new HashMap<>(one);
+		two.forEach((key, value) -> combined.merge(key, value, Double::sum));
+		
+		System.out.println(combined);
 		
 	}
 }
